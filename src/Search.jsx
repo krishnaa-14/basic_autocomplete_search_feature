@@ -15,11 +15,16 @@ const Search = () => {
     const handleOnChange = (event) => {
         setSearchQuery(event.target.value);
 
-        if(searchQuery === "") {
+        if(searchQuery.length === 0) {
             setSearchResults([]);
         }
 
         filterData(searchQuery);
+    }
+
+    const handleOnclick = (event, title) => {
+        setSearchQuery(title);
+        setSearchResults([]);
     }
 
     return (
@@ -33,7 +38,7 @@ const Search = () => {
                     {
                         searchResults.map(searchResult => {
                             return (
-                                <div style = {{width : "350px", height : "30px", border : "1px solid black", borderRadius : "15px", padding : "5px", alignItems : "center", justifyContent : "center", display : "flex", flexDirection : "column"}}>
+                                <div style = {{width : "350px", height : "30px", border : "1px solid black", borderRadius : "15px", padding : "5px", alignItems : "center", justifyContent : "center", display : "flex", flexDirection : "column", cursor : "pointer"}} onMouseEnter={(e) => { e.target.style.backgroundColor = "#ccc" }} onMouseLeave={(e) => { e.target.style.backgroundColor = "" }} onClick = {(e) => handleOnclick(e, searchResult.title)}>
                                     {searchResult.title}
                                 </div>
                             )
